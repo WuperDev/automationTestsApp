@@ -1,0 +1,57 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formularz Logowania</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div></div>
+    <form id="loginForm">
+      <h2>Logowanie</h2>
+      <div class="form-control">
+        <label for="username">Użytkownik:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div class="form-control">
+        <label for="password">Hasło:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit">Zaloguj</button>
+    </form>
+    <div id="error-message" class="hidden"></div>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+
+      // Sprawdzanie poprawności danych logowania
+      if (username === 'test_user' && password === 'testersbay') {
+        // Przekierowanie na stronę powitalną w przypadku poprawnych danych
+        window.location.href = 'welcome.html';
+      } else if (username !== 'test_user' && password !== 'testersbay') {
+        // Komunikat w przypadku złej nazwy użytkownika i złego hasła
+        showError("Nieprawidłowa nazwa użytkownika i hasło.");
+      } else if (username !== 'test_user') {
+        // Komunikat w przypadku złej nazwy użytkownika
+        showError("Nieprawidłowa nazwa użytkownika.");
+      } else {
+        // Komunikat w przypadku złego hasła
+        showError("Nieprawidłowe hasło.");
+      }
+    });
+
+    function showError(message) {
+      var errorMessage = document.getElementById('error-message');
+      errorMessage.textContent = message;
+      errorMessage.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
